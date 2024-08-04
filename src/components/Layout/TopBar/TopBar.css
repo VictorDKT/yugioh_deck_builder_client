@@ -1,0 +1,87 @@
+.top-bar {
+    display: flex;
+    background-color: #5b5fc7;
+}
+
+.data-type-container {
+    display: flex;
+    padding: 10px;
+}
+
+.data-type-buttons-container {
+    display: flex;
+}
+
+.data-type-button:first-child {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.data-type-button:last-child {
+    border-radius: 0px 5px 5px 0px;
+}
+
+.data-type-button:hover {
+    opacity: 0.5;
+}
+
+.data-type-button {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0px;
+    color: black;
+    background-color: white;
+    width: 60px;
+    cursor: pointer;
+}
+
+.data-type-button-selected:hover {
+    opacity: 1;
+}
+
+.data-type-button-selected {
+    color: white;
+    background-color: #dbb900;
+    cursor: default;
+}
+
+.pages-container {
+    display: flex;
+    width: 100%;
+}
+
+.profile-container {
+    display: flex;
+    padding: 10px;
+    font-size: 15px;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-container:hover {
+    text-decoration: underline;
+}
+
+.profile-icon {
+    font-size: 23px;
+    margin-right: 5px;
+}
+
+.exit-button {
+    position: absolute;
+    cursor: pointer;
+    top: 40px;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+.exit-button:hover {
+    text-decoration: underline;
+}

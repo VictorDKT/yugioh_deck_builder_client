@@ -1,0 +1,111 @@
+.deck-page-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.side-container {
+    width: 100%;
+    display: flex;
+}
+
+.card-details {
+    width: 100%;
+}
+
+.deck-label-container {
+    display: grid;
+    grid-template-rows: 6fr 1fr;
+    width: fit-content;
+    height: 100%;
+}
+
+.main-label {
+    background-color: red;
+    color: white;
+    width: 40px;
+}
+
+.extra-label {
+    background-color: blue;
+    color: white;
+    width: 40px;
+}
+
+.deck-label {
+    transform: rotate(270deg);
+    margin-top: 36px;
+}
+
+.deck-container {
+    display: grid;
+    grid-template-rows: 6fr 1fr;
+    width: fit-content;
+    height: 100%;
+}
+
+.main-deck-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: red;
+}
+
+.card-line {
+    display: flex;
+    width: 100%;
+}
+
+.extra-deck-container {
+    display: flex;
+}
+
+.card-box {
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    border: 1px solid black;
+    position: relative;
+}
+
+.extra-deck-slot {
+    width: calc(100% / 15);
+    height: 100%;
+    background-color: blue;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.main-deck-card-image {
+    height: 100%;
+    aspect-ratio: 3 / 4;
+}
+
+.extra-deck-card-box {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    position: relative;
+}
+
+.deck-name-container {
+    padding: 10px 10px 0px;
+    display: flex;
+}
+
+.deck-save-button {
+    background-color: #5b5fc7;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    height: 30px;
+    width: 95px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.deck-save-button:hover {
+    opacity: 0.8;
+}

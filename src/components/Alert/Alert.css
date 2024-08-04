@@ -1,0 +1,79 @@
+.alerts-container {
+    position: relative;
+}
+
+.alert {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    max-width: 275px;
+    width: auto;
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px #999999;
+    z-index: 30;
+    min-height: 50px;
+    align-items: center;
+    color: white;
+    opacity: .95;
+    transition: all 400ms ease;
+}
+
+.alert:hover {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.alert-success {
+    background-color:  #62AC62;
+}
+
+.alert-error {
+    background-color:  #e01616;
+}
+
+.alert-body {
+    display: flex;
+    align-items: center;
+}
+
+.alert-text {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.close-icon {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    text-align: start;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    opacity: 0.5;
+    font-weight: 700;
+    position: absolute;
+    top: -3px;
+    right: 10px;
+}
+
+.close-icon:hover {
+    opacity: 1;
+}
+
+.success-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    min-width: 20px;
+}
+
+.error-icon {
+    margin-right: 10px;
+    font-size: 20px;
+    min-width: 20px;
+}

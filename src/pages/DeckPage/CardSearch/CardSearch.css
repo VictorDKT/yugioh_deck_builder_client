@@ -1,0 +1,95 @@
+.card-search-container {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    position: relative;
+}
+
+.card-search-header {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.card-search-input {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid gray;
+    font-size: 18px;
+    padding: 0px 10px;
+}
+
+.card-search-button {
+    background-color: #5b5fc7;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 36px;
+    border-radius: 27px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left: 10px;
+}
+
+.card-search-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.search-icon {
+    font-size: 16px;
+}
+
+.search-cards-box {
+    height: calc(100% - 65px);
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    position: relative;
+}
+
+.cards-loader {
+    background-color: black;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 10;
+}
+
+.card-container-search {
+    width: 33.33%;
+    aspect-ratio: 3 / 4;
+    cursor: pointer;
+}
+
+.card-image {
+    width: 100%;
+}
+
+.search-cards-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-arrow {
+    cursor: pointer;
+}
+
+.pagination-number {
+    cursor: default;
+    font-size: 19px;
+    margin: 0px 10px;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+}
