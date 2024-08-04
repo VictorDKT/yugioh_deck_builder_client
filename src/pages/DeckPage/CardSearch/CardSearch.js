@@ -40,38 +40,40 @@ export function CardSearch(props) {
                                 if(card) {props.setSelectedCard(card)}
                             }}
                             onClick={()=>{
-                                const extraTypes = [
-                                    "fusion_pendulum",
-                                    "xyz_pendulum",
-                                    "synchro_pendulum",
-                                    "fusion",
-                                    "xyz",
-                                    "synchro",
-                                    "link",
-                                ];
-                                const main = props.cardList.filter(card=>!extraTypes.includes(card.frameType));
-                                const extra = props.cardList.filter(card=>extraTypes.includes(card.frameType));
-                                let mainNumber = 0;
-                                let extraNumber = 0;
+                                if(props.editAbled) {
+                                    const extraTypes = [
+                                        "fusion_pendulum",
+                                        "xyz_pendulum",
+                                        "synchro_pendulum",
+                                        "fusion",
+                                        "xyz",
+                                        "synchro",
+                                        "link",
+                                    ];
+                                    const main = props.cardList.filter(card=>!extraTypes.includes(card.frameType));
+                                    const extra = props.cardList.filter(card=>extraTypes.includes(card.frameType));
+                                    let mainNumber = 0;
+                                    let extraNumber = 0;
 
-                                main.forEach(card=>{mainNumber = mainNumber+card.quantity});
-                                extra.forEach(card=>{extraNumber = extraNumber+card.quantity});
+                                    main.forEach(card=>{mainNumber = mainNumber+card.quantity});
+                                    extra.forEach(card=>{extraNumber = extraNumber+card.quantity});
 
-                                if(!extraTypes.includes(card.frameType)) {
-                                    if(mainNumber >= 60) {
-                                        alertError("Você não pode colocar mais de 60 cartas no main deck")
+                                    if(!extraTypes.includes(card.frameType)) {
+                                        if(mainNumber >= 60) {
+                                            alertError("Você não pode colocar mais de 60 cartas no main deck")
+                                        } else {
+                                            const { main, extra, cardList } = addCardToDeck(props.cardList, card);
+                                            props.setDeck({main, extra});
+                                            props.setCardList(cardList);
+                                        }
                                     } else {
-                                        const { main, extra, cardList } = addCardToDeck(props.cardList, card);
-                                        props.setDeck({main, extra});
-                                        props.setCardList(cardList);
-                                    }
-                                } else {
-                                    if(extraNumber >= 15) {
-                                        alertError("Você não pode colocar mais de 15 cartas no extra deck")
-                                    } else {
-                                        const { main, extra, cardList } = addCardToDeck(props.cardList, card);
-                                        props.setDeck({main, extra});
-                                        props.setCardList(cardList);
+                                        if(extraNumber >= 15) {
+                                            alertError("Você não pode colocar mais de 15 cartas no extra deck")
+                                        } else {
+                                            const { main, extra, cardList } = addCardToDeck(props.cardList, card);
+                                            props.setDeck({main, extra});
+                                            props.setCardList(cardList);
+                                        }
                                     }
                                 }
                             }}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserDecks } from "./requests";
+import { getDecks } from "./requests";
 import"./Decks.css";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { GrFormView } from "react-icons/gr";
@@ -11,7 +11,7 @@ export function Decks() {
     const limit = 10;
 
     useEffect(()=>{
-        getUserDecks(offset, limit).then(response=>{
+        getDecks(offset, limit).then(response=>{
             setDecks(response.data);
             setTotal(response.total);
         });
@@ -24,7 +24,6 @@ export function Decks() {
                 <div className="decks-container">
                     {
                         decks.map(deck=>{
-                            console.log("deck", deck)
                             return (
                                 <div className="deck-item">
                                     <div className="deck-data">
@@ -38,7 +37,11 @@ export function Decks() {
                                         </div>
                                     </div>
                                     <div className="deck-view-box">
-                                        <GrFormView/>
+                                        <GrFormView
+                                            onClick={()=>{
+                                                window.location.pathname = `deck/${deck.id}`
+                                            }}
+                                        />
                                     </div>
                                 </div>
                             )

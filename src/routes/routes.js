@@ -14,8 +14,8 @@ export function Router() {
                 <Route path="/" element={<Decks/>}/>
                 <Route path="decks" element={<Decks/>}/>
                 <Route path="user_decks" element={<UserDecks/>}/>
-                <Route path="user_decks/:id" element={<UserDecks/>}/>
                 <Route path="deck" element={<DeckPage/>}/>
+                <Route path="deck/:id" element={<DeckPage/>}/>
             </Routes>
         </BrowserRouter>
     )

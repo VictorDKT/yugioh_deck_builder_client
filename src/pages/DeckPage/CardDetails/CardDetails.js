@@ -2,10 +2,7 @@ import { useState } from "react";
 import "./CardDetails.css";
 
 
-export function CardDetails(props) {
-    const [name, setName] = useState("");
-
-    return (
+export function CardDetails(props) {return (
         <div className="card-details-container">
             {props.selectedCard &&
                 <div className="details-card-image-box">

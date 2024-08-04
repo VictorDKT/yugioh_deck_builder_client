@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { generateEmptyDeck, removeCardFromDeck, splitArrayIntoChunks } from "./utils";
+import { fillDeck, generateEmptyDeck, removeCardFromDeck, splitArrayIntoChunks } from "./utils";
 import "./DeckPage.css";
 import { CardSearch } from "./CardSearch/CardSearch";
-import { searchCardsRequest } from "./requests";
+import { editDeck, getDeck, saveDeck, searchCardsRequest } from "./requests";
 import { CardDetails } from "./CardDetails/CardDetails";
+import { alertError, alertSuccess } from "../../components/Alert/Alert";
 
 export function DeckPage() {
     const [cardList, setCardList] = useState([]);
@@ -17,12 +18,27 @@ export function DeckPage() {
     const [cardsLoading, setCardsLoading] = useState(true);
     const [selectedCard, setSelectedCard] = useState();
     const [deckName, setDeckName] = useState("");
-
+    const [isEdit, setIsEdit] = useState(false);
+    const [editAbled, setEditAbled] = useState(true);
 
     let { id } = useParams();
 
     useEffect(()=>{
-        //
+        if(id) {
+            setIsEdit(true);
+            getDeck(id).then(response=>{
+                const currentUser = localStorage.getItem("user")
+                const deck = fillDeck(response.cards);
+                if(currentUser && response.user_id === JSON.parse(currentUser).id) {
+                    setEditAbled(true)
+                } else {
+                    setEditAbled(false)
+                }
+                setDeck(deck);
+                setCardList(response.cards);
+                setDeckName(response.name);
+            })
+        }
     }, [id])
 
     useEffect(()=>{
@@ -40,17 +56,57 @@ export function DeckPage() {
                 <div className="card-details">
                     <div className="deck-name-container">
                         <input 
+                            disabled={!editAbled}
+                            defaultValue={deckName}
                             className="card-search-input"
                             placeholder="Digite o nome do deck"
                             onChange={(e)=>{
                                 setDeckName(e.target.value);
                             }}
                         />
-                        <button 
+                        {editAbled && <button 
                             className="deck-save-button"
+                            onClick={async ()=>{
+                                const extraTypes = [
+                                    "fusion_pendulum",
+                                    "xyz_pendulum",
+                                    "synchro_pendulum",
+                                    "fusion",
+                                    "xyz",
+                                    "synchro",
+                                    "link",
+                                ];
+                                const main = cardList.filter(card=>!extraTypes.includes(card.frameType));
+                                let mainNumber = 0;
+
+                                main.forEach(card=>{mainNumber = mainNumber+card.quantity});
+
+                                if(mainNumber >= 40) {
+                                    if(deckName.length > 0) {
+                                        const user = localStorage.getItem("user");
+
+                                        if(user) {
+                                            const response = isEdit ? await editDeck(id, deckName, cardList) : await saveDeck(deckName, cardList);
+
+                                            if(response.success) {
+                                                alertSuccess(isEdit ? "Deck editado com sucesso!" : "Deck criado com sucesso!");
+                                                setTimeout(()=>{
+                                                    window.location.pathname = "user_decks"
+                                                }, 500)
+                                            }
+                                        } else {
+                                            alertError("Faça login para continuar");
+                                        }
+                                    } else {
+                                        alertError("Insira o nome do deck");
+                                    }
+                                } else {
+                                    alertError("Insira ao menos 40 cartas no main deck");
+                                }
+                            }}
                         >
                             Salvar
-                        </button>
+                        </button>}
                     </div>
                     <CardDetails selectedCard={selectedCard} />
                 </div>
@@ -73,9 +129,11 @@ export function DeckPage() {
                                             <div className="card-box">
                                                 {card && <img 
                                                     onClick={()=>{
-                                                        const result = removeCardFromDeck(cardList, card);
-                                                        setDeck({main: result.main, extra: result.extra});
-                                                        setCardList(result.cardList);
+                                                        if(editAbled) {
+                                                            const result = removeCardFromDeck(cardList, card);
+                                                            setDeck({main: result.main, extra: result.extra});
+                                                            setCardList(result.cardList);
+                                                        }
                                                     }}
                                                     style={{
                                                         width: "100%",
@@ -98,9 +156,11 @@ export function DeckPage() {
                                     <div className="extra-deck-card-box">
                                         {card && <img 
                                             onClick={()=>{
-                                                const result = removeCardFromDeck(cardList, card);
-                                                setDeck({main: result.main, extra: result.extra});
-                                                setCardList(result.cardList);
+                                                if(editAbled) {
+                                                    const result = removeCardFromDeck(cardList, card);
+                                                    setDeck({main: result.main, extra: result.extra});
+                                                    setCardList(result.cardList);
+                                                }
                                             }}
                                             style={{
                                                 width: "100%",
@@ -127,6 +187,7 @@ export function DeckPage() {
                     setDeck={setDeck}
                     deck={deck}
                     setSelectedCard={setSelectedCard}
+                    editAbled={editAbled}
                 />
             </div>
         </div>
