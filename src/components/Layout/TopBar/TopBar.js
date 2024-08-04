@@ -2,6 +2,9 @@ import { CgProfile } from "react-icons/cg";
 import './TopBar.css';
 import { useEffect, useState } from "react";
 import { openLoginModal } from "../ModalsProvider";
+import { PiCardholderBold } from "react-icons/pi";
+import { GiCardPick } from "react-icons/gi";
+import { FaPlus } from "react-icons/fa";
 
 export function TopBar() {
     const [exitModalIsOpen, setExitModalIsOpen] = useState(false);
@@ -40,9 +43,36 @@ export function TopBar() {
                     </div>
                 </div>
             </div>
-            <div className="pages-container">
-                <div>
-                
+            <div className="nav-bar">
+                <div style={{display: "flex"}}>
+                    <div 
+                        className="nav-icon-container"
+                        onClick={()=>{
+                            window.location.pathname = "decks";
+                        }}
+                    >
+                        <GiCardPick />
+                    </div>
+                    {user && 
+                        <div 
+                            className="nav-icon-container"
+                            onClick={()=>{
+                                window.location.pathname = "user_decks";
+                            }}
+                        >
+                            <PiCardholderBold />
+                        </div>
+                    }
+                    {user && 
+                        <div 
+                            className="nav-icon-container"
+                            onClick={()=>{
+                                window.location.pathname = "deck";
+                            }}
+                        >
+                            <FaPlus />
+                        </div>
+                    }
                 </div>
             </div>
             <div

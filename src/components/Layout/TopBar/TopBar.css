@@ -47,9 +47,23 @@
     cursor: default;
 }
 
-.pages-container {
+.nav-bar {
     display: flex;
     width: 100%;
+    justify-content: center;
+}
+
+.nav-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    cursor: pointer;
+}
+
+.nav-icon-container:hover {
+    color: white;
+    border-bottom: 3px solid white;
 }
 
 .profile-container {
