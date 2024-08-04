@@ -23,7 +23,7 @@
 
 .decks-container {
     width: 100%;
-    height: calc(100% - 95px);
+    height: calc(100% - 56px - 46px);
     overflow-y: auto;
 }
 
