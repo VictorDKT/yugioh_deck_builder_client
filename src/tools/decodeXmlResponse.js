@@ -1,7 +1,7 @@
 export function decodeXmlResponse(xmlString) {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlString, "application/xml");
-    console.log(xmlToJson(xmlDoc).root)
+    
     return xmlToJson(xmlDoc).root;
 }
 
@@ -56,9 +56,10 @@ function xmlToJson(xml, parentKey = "") {
 }
 
 function convertIfNumeric(key, value) {
-    if (key === "name") {
+    if (key === "name" || key === "token") {
         return value;
     }
     const number = parseFloat(value);
+    
     return isNaN(number) ? value : number;
 }

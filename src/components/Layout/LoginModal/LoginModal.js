@@ -90,7 +90,7 @@ export function LoginModal(props) {
                                             localStorage.setItem("user", JSON.stringify(response.data));
                                             alertSuccess("Login efetuado com sucesso!");
 
-                                            setTimeout(()=>{window.location.reload()}, 500);
+                                            //setTimeout(()=>{window.location.reload()}, 500);
                                         } else {
                                             alertError(errors[response.data]);
                                         }
